@@ -23,6 +23,15 @@
     <color name="theme_accent">#04561a</color>
     <color name="ltgray">#ffe0e0e0</color>
 
+    <color name="colorPrimary">#757575</color>
+    <color name="colorPrimaryDark">#494949</color>
+    <color name="colorPrimaryLight">#a4a4a4</color>
+    <color name="colorAccent">#ff9100</color>
+    <color name="colorSecondary">#ff9100</color>
+    <color name="colorSecondaryDark">#c56200</color>
+    <color name="colorSecondaryLight">#ffc246</color>
+
+    <!--
     <color name="colorPrimary">#dd2c00</color>
     <color name="colorPrimaryDark">#a30000</color>
     <color name="colorPrimaryLight">#ff6434</color>
@@ -30,4 +39,5 @@
     <color name="colorSecondary">#37474f</color>
     <color name="colorSecondaryDark">#102027</color>
     <color name="colorSecondaryLight">#62727b</color>
+    -->
 </resources>

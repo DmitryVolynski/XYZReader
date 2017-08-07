@@ -24,6 +24,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -59,7 +60,9 @@ import static com.example.xyzreader.R.id.toolbar;
  * tablets) or a {@link ArticleDetailActivity} on handsets.
  */
 public class ArticleDetailFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<Cursor>, Toolbar.OnClickListener {
+        LoaderManager.LoaderCallbacks<Cursor>,
+        Toolbar.OnClickListener,
+        NestedScrollView.OnScrollChangeListener {
 
     private Unbinder mUnbinder;
 
@@ -86,6 +89,9 @@ public class ArticleDetailFragment extends Fragment implements
 
     @BindView(R.id.appbar)
     AppBarLayout mAppBar;
+
+    @BindView(R.id.scrollview)
+    NestedScrollView mScrollView;
 
     private Spanned mArticleTextToShare;
     private boolean mFragmentStarted = false;
@@ -127,6 +133,19 @@ public class ArticleDetailFragment extends Fragment implements
         fragment.setArguments(arguments);
 
         return fragment;
+    }
+
+    // I tried to implement recomendation from previous review
+    // It was suggested to show fab button only when user scrolled article text to the end.
+    // This function was implemented, but I think it's not very useful - user should scroll a lot to see this button
+    // So, I leave this code commented
+    @Override
+    public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+        if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
+            //Log.i(TAG, "BOTTOM SCROLL");
+            // show fab button at the end of scrolled text
+            //getActivityCast().mFab.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -180,6 +199,7 @@ public class ArticleDetailFragment extends Fragment implements
                 mCollapsingToolbarLayout.setTitle(mToolbar.getTitle());
             }
         });
+        mScrollView.setOnScrollChangeListener(this);
         return mRootView;
     }
 
@@ -276,9 +296,13 @@ public class ArticleDetailFragment extends Fragment implements
     private void updateMetaBarBackgroundColor() {
         Bitmap bitmap = ((BitmapDrawable)mPhotoView.getDrawable()).getBitmap();
         if (bitmap != null) {
-            Palette p = Palette.from(bitmap).generate();
-            mVibrantColor = p.getVibrantColor(mMutedColor);
-            mMetaBar.setBackgroundColor(mVibrantColor);
+            Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                @Override
+                public void onGenerated(Palette palette) {
+                    mVibrantColor = palette.getVibrantColor(mMutedColor);
+                    mMetaBar.setBackgroundColor(mVibrantColor);
+                }
+            });
         }
     }
 

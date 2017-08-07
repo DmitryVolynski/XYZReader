@@ -1,4 +1,4 @@
-<android.support.design.widget.CoordinatorLayout
+<android.support.design.widget.CoordinatorLayout xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator_layout_list"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,6 +10,8 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:elevation="@dimen/appbar_elevation"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:orientation="vertical"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
@@ -19,6 +21,7 @@
             android:layout_marginEnd="@dimen/list_toolbar_side_margin"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
             android:layout_gravity="bottom">
 
             <ImageView
@@ -34,20 +37,22 @@
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_marginTop="?android:attr/actionBarSize"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbarStyle="outsideOverlay"
+            android:paddingBottom="@dimen/list_vertical_margin"
             android:paddingLeft="@dimen/list_side_margin"
             android:paddingRight="@dimen/list_side_margin"
             android:paddingTop="@dimen/list_vertical_margin"
-            android:paddingBottom="@dimen/list_vertical_margin" />
+            android:scrollbarStyle="outsideOverlay"
+            android:clipToPadding="true"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

@@ -16,8 +16,6 @@
         android:layout_margin="@dimen/fab_margin"
         android:stateListAnimator="@anim/fab_state_list_anim"
         app:layout_anchor="@id/pager"
-        android:elevation="@dimen/fab_elevation"
-        app:pressedTranslationZ="@dimen/fab_press_translation_z"
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@drawable/ic_share" />
 

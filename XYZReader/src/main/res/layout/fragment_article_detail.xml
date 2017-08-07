@@ -95,8 +95,7 @@
             android:layout_marginRight="@dimen/detail_inner_horiz_margin"
             android:fontFamily="sans-serif-light"
             android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
-            android:paddingBottom="@dimen/detail_body_bottom_margin"
-            android:textColorLink="@color/colorAccent" />
+            android:paddingBottom="@dimen/detail_body_bottom_margin"/>
 
     </android.support.v4.widget.NestedScrollView>
 
